@@ -6,8 +6,12 @@
   - spring-cloud-starter-alibaba 2.2.1.RELEASE
   - spring-cloud-starter-stream-rabbit 3.0.6.RELEASE
   
-  需要预装nacos作为注册中心
+  需要在你的环境中预装：
+  - Nacos作为注册中心
+  - Redis进行数据的热存储
+  - RabbitMQ进行服务间数据的交换。
 ### 1.简介
+两个服务可以单独运行，或运行在不同的服务器中。
 - news : 数据交换
   1. 通过WS的方式，向前端推送数据
   2. 支持多种前端方式，只需解析WS收到的数据即可
