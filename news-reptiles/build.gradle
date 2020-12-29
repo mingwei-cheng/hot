@@ -1,0 +1,27 @@
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter') {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging:2.3.3.RELEASE'
+    }
+    compile 'org.springframework.boot:spring-boot-starter-data-redis'
+    compile 'org.springframework.boot:spring-boot-starter-webflux'
+    compile 'org.projectlombok:lombok'
+    compile 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+    compile 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'mysql:mysql-connector-java'
+    compile('us.codecraft:webmagic-core:0.7.3') {
+        exclude group: 'org.slf4j', module: 'slf4j-api:1.7.30'
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12:1.7.30'
+    }
+    compile('us.codecraft:webmagic-extension:0.7.3') {
+        exclude group: 'org.slf4j', module: 'slf4j-api:1.7.30'
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12:1.7.30'
+    }
+    compile group: 'com.alibaba.cloud', name: 'spring-cloud-starter-alibaba-nacos-discovery', version: '2.2.1.RELEASE'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-stream-rabbit', version: '3.0.6.RELEASE'
+
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}

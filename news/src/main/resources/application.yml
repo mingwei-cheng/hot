@@ -1,0 +1,31 @@
+spring:
+  redis:
+    host: 192.168.0.140
+    port: 6379
+  devtools:
+    add-properties: false
+  application:
+    name: news-reptiles
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.0.140:8848
+    stream:
+      bindings:
+        news:
+          # 用来指定topic，要和output的topic对应
+          destination: news-topic
+          # 如果是rocketmq则一定要设置，其他mq可为空
+          group: hot-group
+  rabbitmq:
+    addresses: 192.168.0.140:5672
+    password: 123456
+    username: cmw
+    virtual-host: /
+
+
+logging:
+  level:
+    web: info
+server:
+  port: 8888

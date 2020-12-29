@@ -1,0 +1,55 @@
+buildscript {
+    ext {
+        springbootVersion = '2.3.3.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springbootVersion")
+    }
+}
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'org.springframework.boot'
+
+    group = 'cn.cheng'
+    version = '0.0.1'
+    sourceCompatibility = '1.8'
+    repositories {
+        mavenCentral()
+    }
+    ext {
+        springbootVersion = '2.3.3.RELEASE'
+    }
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+}
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'  //使用springboot插件
+    apply plugin: 'io.spring.dependency-management'  //版本管理插件
+    apply plugin: 'application'  // 识别mainClassName 插件
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+    dependencies {
+        testCompile('org.springframework.boot:spring-boot-starter-test') {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+        compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
+        testCompile 'io.projectreactor:reactor-test'
+        configurations.all {
+            exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+        }
+        compile group: 'com.alibaba.cloud', name: 'spring-cloud-starter-alibaba-nacos-discovery', version: '2.2.1.RELEASE'
+        compile group: 'com.alibaba.cloud', name: 'spring-cloud-alibaba-dependencies', version: '2.2.1.RELEASE'
+        compile group: 'com.alibaba', name: 'fastjson', version: '1.2.73'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
